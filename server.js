@@ -1,8 +1,27 @@
-"use strict";
+require('dotenv').config(); // Load environment variables from .env file
 
-const app = require("./app");
-const { PORT } = require("./config");
+const express = require('express');
+const { Client } = require('pg');
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, function () {
-  console.log(`Started on http://localhost:${PORT}`);
+// Configure PostgreSQL client
+const db = new Client({
+  connectionString: process.env.DATABASE_URL || "postgresql://localhost/jobly"
 });
+
+// Connect to the database
+db.connect()
+  .then(() => console.log("Connected to the database"))
+  .catch(err => console.error("Error connecting to the database", err));
+
+// Example route
+app.get('/', (req, res) => {
+  res.send("Hello, Jobly!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server started on http://localhost:${PORT}`);
+});
+
+module.exports = db;
