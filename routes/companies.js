@@ -24,7 +24,7 @@ const router = new express.Router();
  * Authorization required: admin
  */
 
-router.post("/", ensureAdmin, async function (req, res, next) {
+router.post("/", async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, companyNewSchema);
     if (!validator.valid) {
@@ -69,6 +69,6 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-/** Other routes here... */
+
 
 module.exports = router;

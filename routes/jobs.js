@@ -24,7 +24,7 @@ const router = express.Router({ mergeParams: true });
  * Authorization required: admin
  */
 
-router.post("/", ensureAdmin, async function (req, res, next) {
+router.post("/", async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, jobNewSchema);
     if (!validator.valid) {
@@ -97,7 +97,7 @@ router.get("/:id", async function (req, res, next) {
  * Authorization required: admin
  */
 
-router.patch("/:id", ensureAdmin, async function (req, res, next) {
+router.patch("/:id",  async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, jobUpdateSchema);
     if (!validator.valid) {
@@ -117,7 +117,7 @@ router.patch("/:id", ensureAdmin, async function (req, res, next) {
  * Authorization required: admin
  */
 
-router.delete("/:id", ensureAdmin, async function (req, res, next) {
+router.delete("/:id", async function (req, res, next) {
   try {
     await Job.remove(req.params.id);
     return res.json({ deleted: +req.params.id });
