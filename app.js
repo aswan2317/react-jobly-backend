@@ -4,10 +4,8 @@
 
 const express = require("express");
 const cors = require("cors");
-
-const { NotFoundError } = require("./expressError");
-// const { authenticateJWT } = require("./middleware/auth");
-const authRoutes = require("./routes/auth"); // Fixed typo, should be auth route
+const  authenticateJWT = require("./middleware/auth");
+const authRoutes = require("./routes/auth");
 const companiesRoutes = require("./routes/companies");
 const usersRoutes = require("./routes/users");
 const jobsRoutes = require("./routes/jobs");
